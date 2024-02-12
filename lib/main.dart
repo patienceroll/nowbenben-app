@@ -1,3 +1,7 @@
+import 'dart:convert' as convert;
+import "dart:developer" as developer;
+
+import 'package:determined/api/user/index.dart';
 import 'package:determined/utils/local-storage/index.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +63,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String name = '';
+  String token = '123123';
 
   void _incrementCounter() {
     setState(() {
@@ -71,18 +76,27 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-@override
+  @override
   void initState() {
     super.initState();
     localStorage.getString("名字").then((value) => {
-      if(value is String) {
-        setState(() {
-          name = value;
-        })
-      }
+          if (value is String)
+            {
+              setState(() {
+                name = value;
+              })
+            }
+        });
+    UserApi.postLogin().then((value) {
+      developer.log(convert.jsonEncode(value));
+      setState(() {
+        token = value.data.token;
+      });
+    }).onError((error, stackTrace) {
+      developer.debugger();
+      developer.log(error.toString());
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text(name)
+            Text(name),
+            Text(token)
           ],
         ),
       ),
