@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
-  localStorage.setString('名字', '一二三');
+  localStorage.setString('名字', '张显磊');
 }
 
 class MyApp extends StatelessWidget {
@@ -34,9 +34,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData.dark(useMaterial3: true),
       home: const MyHomePage(title: '首页'),
     );
   }
@@ -87,13 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
               })
             }
         });
-    UserApi.postLogin().then((value) {
-      developer.log(convert.jsonEncode(value));
+    UserApi.postLogin("admin", "123456").then((value) {
       setState(() {
-        token = value.data.token;
+        token = value.token;
       });
     }).onError((error, stackTrace) {
-      developer.debugger();
       developer.log(error.toString());
     });
   }

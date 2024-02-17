@@ -1,4 +1,3 @@
-import "dart:developer";
 import "package:http/http.dart" as http;
 import 'dart:convert' as convert;
 
@@ -13,7 +12,6 @@ class BaseResponse<T> {
       {required this.status, required this.message, required this.data});
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) {
-    log(json['status'].runtimeType.toString());
     return BaseResponse(
       status: json['status'],
       message: json['message'],
@@ -35,22 +33,23 @@ Future<Map<String, String>> getHeader() async {
   };
 }
 
-Future<BaseResponse<T>> get<T>(String url) async {
+Future<BaseResponse<Map<String, dynamic>>> get(String url) async {
   Uri u = Uri.http(ProjectRuntimeConfig.baseUrl, url);
   return http.get(u, headers: await getHeader()).then((value) {
     if (value.statusCode == 200) {
-      return BaseResponse<T>.fromJson(convert.jsonDecode(value.body));
+      return BaseResponse.fromJson(convert.jsonDecode(value.body));
     } else {
       throw Exception("接口请求错误");
     }
   });
 }
 
-Future<BaseResponse<T>> post<T>(String url, {Object? body}) async {
+Future<BaseResponse<Map<String, dynamic>>> post(String url,
+    {Object? body}) async {
   Uri u = Uri.http(ProjectRuntimeConfig.baseUrl, url);
   return http.post(u, headers: await getHeader(), body: body).then((value) {
     if (value.statusCode == 200) {
-      return BaseResponse<T>.fromJson(convert.jsonDecode(value.body));
+      return BaseResponse.fromJson(convert.jsonDecode(value.body));
     } else {
       throw Exception("接口请求错误");
     }
