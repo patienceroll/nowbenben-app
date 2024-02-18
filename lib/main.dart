@@ -1,4 +1,3 @@
-import 'dart:convert' as convert;
 import "dart:developer" as developer;
 
 import 'package:determined/api/user/index.dart';
