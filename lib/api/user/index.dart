@@ -9,10 +9,10 @@ class TokenResponse {
 }
 
 class UserApi {
-  static Future<TokenResponse> postLogin(
+  static Future<BaseResponse<TokenResponse>> postLogin(
       String account, String password) async {
-    final data = await post("/api/login",
+    final data = await post<TokenResponse>("/api/login",
         body: {'account': account, 'password': password});
-    return TokenResponse.fromJson(data.data);
+    return data;
   }
 }

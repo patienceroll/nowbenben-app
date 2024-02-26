@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
     UserApi.postLogin("admin", "123456").then((value) {
       setState(() {
-        token = value.token;
+        token = value.data.token;
       });
     }).onError((error, stackTrace) {
       developer.log(error.toString());
