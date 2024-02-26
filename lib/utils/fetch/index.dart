@@ -37,24 +37,28 @@ Future<Map<String, String>> getHeader() async {
   };
 }
 
-Future<BaseResponse<T>> get<T>(String url) async {
+Future<dynamic> get(String url) async {
   Uri u = Uri.http(ProjectRuntimeConfig.baseUrl, url);
   return http.get(u, headers: await getHeader()).then((value) {
     if (value.statusCode == 200) {
       final data = convert.jsonDecode(value.body);
-      return BaseResponse.fromJson(data, (json) => json);
+      final baseResponse = BaseResponse<void>.fromJson(data, (json) => {});
+      if (baseResponse.status == 1) {}
+      return data;
     } else {
       throw Exception("接口请求错误");
     }
   });
 }
 
-Future<BaseResponse<T>> post<T>(String url, {Object? body}) async {
+Future<dynamic> post(String url, {Object? body}) async {
   Uri u = Uri.http(ProjectRuntimeConfig.baseUrl, url);
   return http.post(u, headers: await getHeader(), body: body).then((value) {
     if (value.statusCode == 200) {
-      return BaseResponse.fromJson(
-          convert.jsonDecode(value.body), (json) => json);
+      final data = convert.jsonDecode(value.body);
+      final baseResponse = BaseResponse<void>.fromJson(data, (json) => {});
+      if (baseResponse.status == 1) {}
+      return data;
     } else {
       throw Exception("接口请求错误");
     }

@@ -38,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String name = '';
-  String token = '123123';
+  String token = '默认token';
 
   void _incrementCounter() {
     setState(() {
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
         token = value.data.token;
       });
     }).onError((error, stackTrace) {
-      developer.log(error.toString());
+      developer.debugger();
     });
   }
 
