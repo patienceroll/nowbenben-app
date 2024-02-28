@@ -25,7 +25,7 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {router.goNamed("about")},
+        onPressed: () => {router.push("/about")},
         child: const Icon(Icons.add),
       ),
     );

@@ -5,7 +5,7 @@ class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
   void onPressedJump() {
-    router.goNamed('home');
+    router.push('/home');
   }
 
   @override
