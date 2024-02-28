@@ -1,3 +1,4 @@
+import 'package:determined/routes/index.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,6 +23,10 @@ class HomePageState extends State<HomePage> {
             children: [const Text("点击了多少次:"), Text('$count')],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {router.goNamed("about")},
+        child: const Icon(Icons.add),
       ),
     );
   }
