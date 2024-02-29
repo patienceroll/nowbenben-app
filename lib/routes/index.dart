@@ -11,5 +11,10 @@ final router = GoRouter(initialLocation: '/home', routes: [
   GoRoute(
       path: '/about',
       name: "about",
-      builder: (context, state) => const AboutPage()),
+      builder: (context, state) {
+        final id = state.uri.queryParameters['id'];
+        return AboutPage(
+          id: id as String,
+        );
+      }),
 ]);
