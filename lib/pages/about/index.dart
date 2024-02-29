@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:determined/routes/index.dart';
 import 'package:flutter/material.dart';
 
