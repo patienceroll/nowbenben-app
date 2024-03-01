@@ -1,16 +1,17 @@
-import 'package:determined/routes/index.dart';
 import 'package:flutter/material.dart';
+
+import 'package:determined/routes/index.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() {
-    return HomePageState();
+    return _HomePageState();
   }
 }
 
-class HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   int count = 0;
 
   @override
