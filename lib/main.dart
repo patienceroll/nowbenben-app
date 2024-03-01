@@ -34,13 +34,16 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ),
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen)),
-    );
+    return Provider.value(
+        value: _user,
+        builder: (context, child) => MaterialApp.router(
+              routerConfig: router,
+              darkTheme: ThemeData.dark(
+                useMaterial3: true,
+              ),
+              theme: ThemeData(
+                  colorScheme:
+                      ColorScheme.fromSeed(seedColor: Colors.lightGreen)),
+            ));
   }
 }

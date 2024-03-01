@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:determined/api/user/type.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:determined/routes/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<User?>()?.createdAt;
     return Scaffold(
       body: SafeArea(
         child: Center(
